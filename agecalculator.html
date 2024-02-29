@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        main{
+            width:100%;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        section{
+            width:45%;
+            padding:15px;
+            background-color:#c63838;
+            box-shadow:15px 15px 10px rgb(91, 84, 84);
+
+        }
+        section h1{
+            text-align:center;
+            font-size:30px;
+            margin:5px;
+        }
+        h2{
+            text-align:center;
+            font-size:15px;
+        }
+        form{
+            font-size:23px;
+            width:100%;
+            padding:50px;
+            background-color:#fff;
+        }
+        label,input{
+            width:100%;
+            padding:15px;
+            font-size:25px;
+        }
+         .btn{
+            display:block;
+            margin:10px auto;
+            padding:10px;
+            font-size:22px;
+            background-color:rgb(143, 187, 233);
+        }
+         @media only screen and (max-width:1024px){
+            section{
+                width:60%;
+                padding:20px;
+            }
+        }
+        @media only screen and (max-width:800px){
+            section{
+                width:70%;
+                background-color:rgb(149, 92, 128);
+            }
+        }
+        @media only screen and (max-width:700px){
+            section{
+                width:70%;
+                background-color:rgb(50, 110, 128);
+            }
+        } 
+        @media only screen and (max-width:500px){
+            section{
+                width:80%;
+                font-size:22px;
+                background-color:rgb(110, 191, 215);
+            }
+            form{
+                padding:10px;
+            }
+        }
+        @media only screen and (max-width:400px){
+            section{
+                width:80%;
+                background-color:rgb(152, 188, 199);
+            }
+            section h1{
+                font-size:19px;
+            }
+            form{
+                padding:10px;
+            }
+           form input,label,.btn{
+                font-size:18px;
+                color:blue;
+                padding:5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+    <section>
+        <h1>Age Calculator</h1>
+        <form>
+            <h2>Enter Your date of birth Accordingly</h2>
+            <label>Day</label>
+            <input type="number" min="1" max="31" placeholder="Enter Day" id="day" name="day" value="" required>
+            <label>Month</label>
+            <input type="number" min="1" max="12" placeholder="Enter Month" id="month" name="month" value="" required>
+            <label>Year</label>
+            <input type="number" placeholder="Enter Year" id="year" name="year" value="" required>
+            <h2 id="displayage"></h2>
+            <button class="btn" type="button" onclick="myage()">Submit</button>            
+        </form>
+    </section>
+</main>
+<script>
+const myage = () => {
+    let inputelem=document.querySelectorAll("input[type='number']");
+    inputelem.forEach((e)=>{
+        if(e.value==''){
+            alert("Enter Proper Date ");
+        }
+    })
+    let day = parseInt(document.getElementById("day").value);
+    let month = parseInt(document.getElementById("month").value);
+    let year = parseInt(document.getElementById("year").value);
+    if(day==30 && month==2){
+        alert("Is not valid date");
+    }
+
+    let todayDate = new Date();
+    let tday = todayDate.getDate(); // Day of the month
+    let tmonth = todayDate.getMonth() + 1; // Month (adding 1 because months are zero-based)
+    let tyear = todayDate.getFullYear(); // Full year
+    let display=document.getElementById("displayage");
+    let d,m,y;
+    
+    if(tday<day){
+        tday=tday+30;
+        d=tday-day;
+        tmonth=tmonth-1;
+    }
+    else{
+        d=tday-day;
+    }
+    if(tmonth<month){
+        tmonth=tmonth+12;
+        m=tmonth-month;
+        tyear=tyear-1;
+        y=tyear-year;
+    }
+    else{
+        m=tmonth-month;
+        y=tyear-year;
+    }
+    display.innerHTML=`You are ${y} year ${m} month and ${d} day's old`;
+
+}
+</script>
+</body>
+</html> 
